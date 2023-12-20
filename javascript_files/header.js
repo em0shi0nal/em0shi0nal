@@ -15,7 +15,7 @@ document.write("<a href='/comics.html'> <button class = 'btn'> JorjComics </butt
 document.write("</li>")
 
 document.write("<li>")
-document.write("<a href='/'>  <button class = 'btn'> JorjProjects </button> </a>")
+document.write("<a href='/Projects.html'>  <button class = 'btn'> JorjProjects </button> </a>")
 document.write("</li>")
 
 document.write("<li>")
