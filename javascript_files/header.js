@@ -16,7 +16,7 @@ document.write(" <button class='header__button' id='btnNav' type='button' style 
 document.write("    <i class='material-icons' style = 'font-size: 30px; padding: 3px;'>menu</i>")
 document.write(" </button>")
 document.write(" <a href='/' style = 'float: left; font-family: Impact; font-size: x-large; color: #C7DD06ff; text-decoration: none; display: block; padding: 3px'>JORJ WORLD</a>")
-document.write(" <img src= './comics/jorjworld.gif'  style = 'float: left; height: 36px; width: 36px;display: block; padding: 3px' />")
+
 document.write(" </div>")
 document.write(" <a href='/AboutMe.html' class='nav__link '>")
 document.write("    <i class='material-icons'>fingerprint</i>")
