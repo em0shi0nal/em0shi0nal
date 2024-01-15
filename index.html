@@ -7,9 +7,53 @@
         <link href = "css_files/style.css" rel="stylesheet"/> 
         <link rel="icon" type="image/x-icon" href="/comics/favicon.ico">
 
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
     <body>
-        <script src = "javascript_files/header.js"></script>
+
+        <header class="navbar">
+            <button class="header__button" id="btnNav" type="button" style = 'float: left; margin-right: 14px;'>
+                <i class="material-icons" style = "font-size: 30px; padding: 3px;">menu</i>
+            </button>
+            <a href='/' style = 'float: left; font-family: Impact; font-size: x-large; color: #C7DD06ff; text-decoration: none; display: block; padding: 3px'>JORJ WORLD</a>
+            <img src= './comics/jorjworld.gif'  style = 'float: left; height: 36px; width: 36px;display: block; padding: 3px' />
+        </header>
+
+        <nav class="nav">
+            <div class="nav__links">
+                <div class = "icons" style = "padding: 5px; margin-bottom: 45px; margin-top: 10px;">
+                    <button class="header__button" id="btnNav" type="button" style = 'float: left; margin-right: 14px;'>
+                        <i class="material-icons" style = "font-size: 30px; padding: 3px;">menu</i>
+                    </button>
+                    <a href='/' style = 'float: left; font-family: Impact; font-size: x-large; color: #C7DD06ff; text-decoration: none; display: block; padding: 3px'>JORJ WORLD</a>
+                    <img src= './comics/jorjworld.gif'  style = 'float: left; height: 36px; width: 36px;display: block; padding: 3px' />
+                </div>
+                <a href="/AboutMe.html" class="nav__link ">
+                    <i class="material-icons">fingerprint</i>
+                    JorjAboutMe
+                </a>
+                <a href="/Projects.html" class="nav__link">
+                    <i class="material-icons">lightbulb</i>
+                    JorjProjects
+                </a>
+                <a href="/comics.html" class="nav__link">
+                    <i class="material-icons">bookmark</i>
+                    JorjComics
+                </a>
+                <a href="/brainrot.html" class="nav__link">
+                    <i class="material-icons">dangerous</i>
+                    JorjBrainrot
+                </a>
+                <a href="/" class="nav__link">
+                    <i class="material-icons">pets</i>
+                    JorjDinos
+                </a>
+            </div>
+            <div class="nav__overlay"></div>
+        </nav>
+
+   
+
         <div class = "margpad" style = "border-radius: 30px">
             <h1>
                 WEBSITE UNDER CONSTRUCTION
@@ -46,6 +90,19 @@
             </ul>
         </div>
         
-        
+       <script>
+        document.addEventListener("DOMContentLoaded", ()=> {
+            const nav = document.querySelector(".nav");
+
+            document.querySelector("#btnNav").addEventListener("click", () => {
+                nav.classList.add("nav--open");
+            });
+
+            document.querySelector(".nav__overlay").addEventListener("click", () => {
+                nav.classList.remove("nav--open");
+            });
+
+        });
+       </script> 
     </body>
 </html>
