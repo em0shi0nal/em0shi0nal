@@ -12,8 +12,8 @@ document.write("</header>")
 document.write("<nav class='nav'>")
 document.write("<div class='nav__links'>")
 document.write(" <div class = 'icons' style = 'padding: 5px; margin-bottom: 45px; margin-top: 10px;'>")
-document.write(" <button class='header__button' id='btnNav' type='button' style = 'float: left; margin-right: 14px;'>")
-document.write("    <i class='material-icons' style = 'font-size: 30px; padding: 3px;'>menu</i>")
+document.write(" <button class='header__button' id='btnNavclose' type='button' style = 'float: left; margin-right: 14px;'>")
+document.write("    <i class='material-icons' style = 'font-size: 30px; padding: 3px;'>menu_open</i>")
 document.write(" </button>")
 document.write(" <a href='/' style = 'float: left; font-family: Impact; font-size: x-large; color: #C7DD06ff; text-decoration: none; display: block; padding: 3px'>JORJ WORLD</a>")
 
@@ -50,6 +50,10 @@ document.addEventListener("DOMContentLoaded", ()=> {
     });
 
     document.querySelector(".nav__overlay").addEventListener("click", () => {
+        nav.classList.remove("nav--open");
+    });
+
+    document.querySelector("#btnNavclose").addEventListener("click", () => {
         nav.classList.remove("nav--open");
     });
 
