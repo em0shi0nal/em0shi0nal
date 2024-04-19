@@ -1,0 +1,311 @@
+openapi: 3.0.3
+info:
+  title: Week 5 Server Example API
+  description: |
+    API written for Week 5 Server Example.
+    
+    Please examine the 'example' return values carefully - for example, the GET post/:postid route requires your object to be wrapped in a 'post' key.
+    
+    Also, feel free to ignore the names of some of the schemas at the bottom of this file - this is only a label. To find out what each route takes in as input and returns, you instead should look at the "Example Value" within each route.
+
+    
+  version: 1.0.0
+    
+tags:
+  - name: Sample
+    description: Routes that are provided in starter code
+  - name: Jobs
+    description: Creating or listing jobs in the forum
+  - name: Job
+    description: Interacting with one specific job
+  - name: Other
+    description: Routes that don't fit in any of the categories above
+
+paths:
+  /:
+    get:
+      tags:
+        - Sample
+      summary: Displays a message
+      responses:
+        '200':
+          $ref: '#/components/responses/MessageResponse'
+
+
+  /clear:
+    delete:
+      tags:
+        - Other
+      summary: Clears the data store
+      responses:
+        '200':
+          $ref: '#/components/responses/EmptyObjectResponse'
+
+  /jobs/create:
+    post:
+      tags:
+        - Jobs
+      summary: Adds a new job to the data store
+      requestBody:
+        $ref: '#/components/requestBodies/JobCreateBody'
+      responses:
+        '200':
+          description: A jobId corresponding to the job is returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobId:
+                    $ref: '#/components/schemas/JobId'
+        '400':
+          description: |
+            If any of the following is true:
+              - title is an empty string, ""
+              - company is an empty string, ""
+              - location is an empty string, ""
+              - salary is strictly negative, i.e. < 0
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorObject'
+
+  /jobs/list:
+    get:
+      tags:
+        - Jobs
+      summary: Get all jobs
+      description: |
+          Fetch brief details about all jobs that are above a certain salary
+      parameters:
+        - name: minSalary
+          in: query
+          description: Minimum salary to filter jobs by
+          schema:
+            type: number
+            example: 50000
+      responses:
+        '200':
+          description: Yay :)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  posts:
+                    $ref: '#/components/schemas/JobsList'
+        '400':
+          description: |
+            If any of the following is true:
+              - jobid does not refer to a valid post
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorObject'
+    
+
+  /job/{jobid}:
+    get:
+      tags:
+        - Job
+      summary: Get full job information
+      description: | 
+        Fetch all details about a single job.
+      parameters:
+        - $ref: '#/components/parameters/JobId'
+      responses:
+        '200':
+          description: Yay :)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  job:
+                    $ref: '#/components/schemas/JobFull'
+        '400':
+          description: |
+            If any of the following is true:
+              - jobid does not refer to an existing job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorObject'
+    put:
+      tags:
+        - Job
+      summary: Edits a job based on the given information
+      parameters:
+        - $ref: '#/components/parameters/JobId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobInputData'
+      responses:
+        '200':
+          $ref: '#/components/responses/EmptyObjectResponse'
+        '400':
+          description: |
+            If any of the following is true:
+              - title is an empty string, ""
+              - company is an empty string, ""
+              - location is an empty string, ""
+              - salary is strictly negative, i.e. < 0
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorObject'
+    delete:
+      tags:
+        - Job
+      summary: Removes a job
+      description: | 
+        Remove a job from the data store.
+      parameters:
+        - $ref: '#/components/parameters/JobId'
+      responses:
+        '200':
+          $ref: '#/components/responses/EmptyObjectResponse'
+        '400':
+          description: |
+            If any of the following is true:
+              - jobid does not refer to an existing job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorObject'
+
+
+components:
+  schemas:
+    Error:
+      type: string
+      example: Replace this with a relevant error message!
+      description: A specific error message of your choice!
+
+    ErrorObject:
+      type: object
+      description: Object containing error key
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+
+    Message:
+      type: string
+      example: Hello darkness my old friend!
+      description: Some message of type string :)
+
+    MessageObject:
+      type: object
+      description: Object containing message key
+      properties:
+        message:
+          $ref: '#/components/schemas/Message'
+    
+    Title:
+      type: string
+      description: Title describing what the job is about
+      example: Backend Software Engineer
+
+    Company:
+      type: string
+      description: Name of a company posting the job
+      example: Google
+    
+    Location:
+      type: string
+      description: Location of the job for hire
+      example: 1 Darling Harbour, Sydney Australia
+
+    Salary:
+      type: number
+      description: How much you will get paid for the job annually
+      example: 100000
+    
+    JobId:
+      type: number
+      description: A unique, immutable and non-reusable id that corresponds to exactly one job
+      example: 527
+
+    JobInputData:
+      type: object
+      description: Data that the user would input to create or edit a job
+      properties:
+        title:
+          $ref: '#/components/schemas/Title'
+        company:
+          $ref: '#/components/schemas/Company'
+        location:
+          $ref: '#/components/schemas/Location'
+        salary:
+          $ref: '#/components/schemas/Salary'
+
+    JobFull:
+      description: Full details about a forum job, including comments
+      allOf:
+        - $ref: '#/components/schemas/JobInputData'
+        - type: object
+          properties:
+            jobId:
+              $ref: '#/components/schemas/JobId'
+    
+    JobItem:
+      description: Brief details about a forum job, excluding content and comments
+      type: object
+      properties:
+        jobId:
+          $ref: '#/components/schemas/JobId'
+        title:
+          $ref: '#/components/schemas/Title'
+        salary:
+          $ref: '#/components/schemas/Salary'
+
+    JobsList:
+      type: array
+      description: Array of jobs with brief information
+      items:
+        $ref: '#/components/schemas/JobItem'
+
+    
+    EmptyObject:
+      type: object
+      description: lol why even bother reading this!
+    
+  parameters:
+    JobId:
+      in: path
+      name: jobid
+      required: true
+      schema:
+        $ref: '#/components/schemas/JobId'
+
+  requestBodies:
+    EchoRequestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Message'
+
+    JobCreateBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JobInputData'
+
+  responses:
+    MessageResponse:
+      description: Some message of type string :)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MessageObject'
+    
+    EmptyObjectResponse:
+      description: Returns an empty object upon success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EmptyObject'
