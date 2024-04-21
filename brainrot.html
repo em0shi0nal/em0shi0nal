@@ -10,38 +10,46 @@
     <body>
         <script src = "javascript_files/header.js"></script>
         <div class = "margpad">
-        <h1>
-            Ploffa Reviews UNSW courses
-        </h1>
+            <h1>
+                Ploffa review unsw courses
+            </h1>
+          <ul class="menu">
+            <li class="menu-item" onclick="toggleSubMenu(event)"> ELEC3106 24T1>>
+              <ul class="submenu">
+                <li class="menu-item" onclick="event.stopPropagation()">Submenu Item 1</li>
+                <li class="menu-item" onclick="event.stopPropagation()">Submenu Item 2</li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="menu">
+            <ul class="menu-item" onclick="toggleSubMenu(event)"> TELE3113 24T1>>
+                <ul class="submenu" >
+                  <li class="menu-item" onclick="event.stopPropagation()">Submenu Item 3</li>
+                  <li class="menu-item" onclick="event.stopPropagation()">Submenu Item 4</li>
+                </ul>
+            </ul>
+          </ul>
 
-        <ul>
-            <li>
-                <a href="/artgallery_161223.html" > ELEC1111 </a>
-            </li>
-            <li>
-                <a href="/artgallery_161223.html" > ELEC2141 </a>
-            </li>
-            <li>
-                <a href="/artgallery_161223.html" > ELEC2134 </a>
-            </li>
-            <li>
-                <a href="/artgallery_161223.html" > ELEC2133 </a>
-            </li>
-            <li>
-                <a href="/artgallery_161223.html" > DESN2000 </a>
-            </li>
-            <li>
-                <a href="/artgallery_161223.html" > ELEC3104 </a>
-            </li>
-            <li>
-                <a href="/artgallery_161223.html" > ELEC3106 </a>
-            </li>
-            <li>
-                <a href="/artgallery_161223.html" > TELE3113 </a>
-            </li>
-            
-
-        </ul>
+          <ul class="menu">
+            <ul class="menu-item" onclick="toggleSubMenu(event)"> ELEC3104 24T1>>
+                <ul class="submenu" >
+                  <li class="menu-item" onclick="event.stopPropagation()">Submenu Item 3</li>
+                  <li class="menu-item" onclick="event.stopPropagation()">Submenu Item 4</li>
+                </ul>
+            </ul>
+          </ul>
+          
     </div>
-    </body>
+          <script>
+          function toggleSubMenu(event) {
+            // Get the submenu associated with the clicked menu item
+            const submenu = event.target.querySelector('.submenu');
+          
+            // Toggle the display of the submenu
+            if (submenu) {
+              submenu.style.display = (submenu.style.display === 'none') ? 'block' : 'none';
+            }
+          }
+          </script>
+        </body>
 </html>

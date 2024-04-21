@@ -10,24 +10,37 @@
     <body>
         <script src = "javascript_files/header.js"></script>
         <div class = "margpad">
-        <h1>
-            I LOVE ELEC3106
-        </h1>
-        <p>
-          Yap
-        </p>
-
-        <p>
-           Yap
-        </p>
-
-        <p>
-            Yap
-            <br>
-            <br>
-             Yap
-
-        </p>
-    </div>
-    </body>
+        <!-- Text blocks with title bars -->
+        <div onclick="toggleText(this)" >
+            <div class="rounded-border">
+                <h3> ELEC3106 24T1 </h3> 
+                <div class= "inner-text">
+                    <p>
+                        <br>
+                        This is the content of block 1. You can add any amount of text content here.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-block" onclick="toggleText(this)">
+          <h3>Block 2</h3>
+          <p>
+            This is the content of block 2. You can add any amount of text content here.
+          </p>
+        </div>
+        
+        <!-- Script to toggle visibility of text blocks -->
+        <script>
+          function toggleText(element) {
+            const textContent = element.querySelector('p');
+            if (textContent.style.display === "none") {
+              textContent.style.display = "block";
+            } else {
+              textContent.style.display = "none";
+            }
+          }
+        </script>
+        
+        </body>
 </html>
